@@ -6,9 +6,9 @@
 		<span style="display: flex;">Token Bilgileriniz</span>
 		<div>
 			<span>Token:</span>
-			<span id="token" style="padding-left: 20px;"></span>
+			<span id="token"></span>
 			<span>Device Id:</span>
-			<span id="deviceId" style="padding-left: 20px;"></span>
+			<span id="deviceId"></span>
 		</div>
 		<span style="display: flex;">Bu site Test ortamına bağlıdır.</span>
 	</div>
@@ -22,8 +22,14 @@
 			if (token == null) {
 				document.getElementById("token").innerHTML = 'token alamadınız';
 			} else {
-				console.log(token)
 				document.getElementById("token").innerHTML = token;
+			}
+		});
+		dengage('getDeviceId', function(device_id) {
+			if (device_id == null) {
+				document.getElementById("deviceId").innerHTML = 'device_id alamadınız';
+			} else {
+				document.getElementById("deviceId").innerHTML = device_id;
 			}
 		});
 	</script>
