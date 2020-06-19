@@ -1,68 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<script src="dengage-js-sdk.js" async></script>
-	<script src="fg_deneme.js" ></script>
-	<!--<script src="https://appdev.dengage.com/push/sdk/3/b27bee07-ee71-e2c5-6fe2-af39af12e0ee.js" async=""></script>-->s
-
+	<title>Dengage</title>
+	<div>
+		<span>Token Bilgileriniz</span>
+		<span>{{getToken}}</span>
+	</div>
 	<script>
-function getTableHtml(components) {
-	var html = '<table>';
-	for (let i = 0; i < components.length; i++) {
-		const c = components[i];
-		html += `
-		<tr>
-			<td>${c.key}</td>
-			<td>${c.value}</td>
-		</tr>
-		`
-	}
-	html += '</table>';
-	return html;
-}
+		!function(e,a,n,d,g){e.dengage=e.dengage||function(){(e.dengage.q=e.dengage.q||[]).push(arguments)},d=a.getElementsByTagName("head")[0],(g=a.createElement("script")).async=1,g.src="https://ptest.dengage.com/p/push/11/f555188c-a64b-6558-337f-08a9c94a9215/dengage_sdk.js",d.appendChild(g)}(window,document);
 	
-function getFingerprint() {
-	var options = {
-		fontsFlash: false,
-		extraComponents : [
-			/*{
-				key: 'customKey', 
-				getData: function (done, options) {
-					done('infos ...')
-				},
-			},*/
-		]
-	};
-	Fingerprint2.get(options, function (components) {
-		console.log(components) // an array of components: {key: ..., value: ...}
-		var values = components.map(function (component) { return component.value })
-		var murmur = Fingerprint2.x64hash128(values.join(''), 31)
-		document.getElementById('finger_print').innerHTML = getTableHtml(components);
-		document.getElementById('hash').innerHTML = murmur;
-		
-	})
-}
-
-window.onload = function() {
-	if (window.requestIdleCallback) {
-		requestIdleCallback(function () {
-			getFingerprint();
-		})
-	} else {
-		setTimeout(function () {
-			getFingerprint();
-		}, 500)
-	}	
-};
+		dengage('initialize');
 	</script>
+	<script>
+		var getToken= '';
+		dengage('getToken', function(token) {
+			if (token == null) {
+				console.log('token alamadınız')
+			} else {
+				console.log(token)
+				getToken = token;
+			}
+		});
+	</script>
+	
+
 </head>
 <body>
-	<div id="finger_print">
-		
-	</div>
-	<div id="hash">
-		
-	</div>
+	
 </body>
 </html>
