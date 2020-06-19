@@ -4,7 +4,7 @@
 	<title>Dengage</title>
 	<div>
 		<span>Token Bilgileriniz</span>
-		<span>{{getToken}}</span>
+		<span id="token">getToken</span>
 	</div>
 	<script>
 		!function(e,a,n,d,g){e.dengage=e.dengage||function(){(e.dengage.q=e.dengage.q||[]).push(arguments)},d=a.getElementsByTagName("head")[0],(g=a.createElement("script")).async=1,g.src="https://ptest.dengage.com/p/push/11/f555188c-a64b-6558-337f-08a9c94a9215/dengage_sdk.js",d.appendChild(g)}(window,document);
@@ -12,13 +12,12 @@
 		dengage('initialize');
 	</script>
 	<script>
-		var getToken= '';
 		dengage('getToken', function(token) {
 			if (token == null) {
-				console.log('token alamadınız')
+				document.getElementById("token").innerHTML = 'token alamadınız';
 			} else {
 				console.log(token)
-				getToken = token;
+				document.getElementById("token").innerHTML = token;
 			}
 		});
 	</script>
